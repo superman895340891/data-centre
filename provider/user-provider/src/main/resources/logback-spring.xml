@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="logback.logdir" value="../logs" />
+    <property name="logback.appname" value="ecp-main-site-service" />
+    <!--控制台答应-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%X{traceId}][%c:%L] - %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 按照每天生成日志文件 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--文件名-->
+        <File>${logback.logdir}/${logback.appname}/${logback.appname}.log</File>
+        <!--日志策略：rollingPolicy滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>${logback.logdir}/${logback.appname}/${logback.appname}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--日志文件保留天数-->
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%X{traceId}][%c:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成异常日志文件 -->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--过滤级别输入级别-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+        <!--存储位置-->
+        <File>${logback.logdir}/${logback.appname}/error/${logback.appname}.error.log</File>
+        <!--日志策略：rollingPolicy滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>${logback.logdir}/${logback.appname}/error/${logback.appname}.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--日志文件保留天数-->
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%t][%c:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成延迟响应日志文件 -->
+    <appender name="SlowResponseAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--文件名-->
+        <File>${logback.logdir}/${logback.appname}/slow/slow-response.log</File>
+        <!--日志策略：rollingPolicy滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>${logback.logdir}/${logback.appname}/slow/slow-response.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--日志文件保留天数-->
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%t] - %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="WxChatLogRecord" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logback.logdir}/${logback.appname}/error/wxchatlog.error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logback.logdir}/${logback.appname}/error/wxchatlog.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%t] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="SystemErrorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logback.logdir}/${logback.appname}/error/system.error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logback.logdir}/${logback.appname}/error/system.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%t] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--分页存储策略-->
+    <appender name="PageLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logback.logdir}/${logback.appname}/page/page.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logback.logdir}/${logback.appname}/page/page.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="SlowResponse" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="SlowResponseAppender" />
+    </logger>
+    <logger name="WxChatLog" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="WxChatLogRecord" />
+    </logger>
+    <logger name="SystemError" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="SystemErrorAppender" />
+    </logger>
+    <logger name="PageLog" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="PageLogAppender" />
+    </logger>
+
+    <logger name="com.ailbaba.cloud.cgc.mapping" level="DEBUG" />
+<!--    <logger name="com.ecp.mainsite.mapper" level="DEBUG" />-->
+<!--    <logger name="com.ecp.saas.mapper" level="DEBUG" />-->
+<!--    <logger name="com.ecp.partner.mapper" level="DEBUG" />-->
+<!--    <logger name="com.ecp.push.mapper" level="DEBUG" />-->
+<!--    <logger name="com.ecp.sell.seller.mapper" level="DEBUG" />-->
+<!--    <logger name="com.ecp.sell.buyer.mapper" level="DEBUG" />-->
+
+    <root level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+        <appender-ref ref="fileErrorLog" />
+    </root>
+</configuration>

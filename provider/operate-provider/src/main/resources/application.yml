@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: operate-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 118.24.105.102:8848
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://118.24.105.102:3366/zebra-tourisn?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+dubbo:
+  scan:
+    base-packages: com.ailbaba.cloud.cgc.service.impl
+  protocol:
+    name: dubbo
+    port: 8345
+    serialization: kryo
+  registry:
+    address: nacos://118.24.105.102:8848
+    port: 80
+  provider:
+    filter: traceFilter
+  application:
+    name: operate-provider
+mybatis:
+  type-aliases-package: com.ailbaba.cloud.cgc.mapping
+  mapper-locations: classpath:mapper/*.xml
+
+
+server:
+  port: 13800
+
+logging:
+  config: classpath:logback-spring.xml
+
+
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070
