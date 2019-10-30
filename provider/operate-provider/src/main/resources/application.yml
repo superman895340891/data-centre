@@ -5,6 +5,7 @@ spring:
     nacos:
       discovery:
         server-addr: 118.24.105.102:8848
+
   main:
     allow-bean-definition-overriding: true
   datasource:
@@ -34,6 +35,10 @@ dubbo:
     port: 80
   provider:
     filter: traceFilter
+    timeout: 60000
+    retries: 0
+  consumer:
+    timeout: 1200000
 mybatis:
   type-aliases-package: com.ailbaba.cloud.cgc.mapping
   mapper-locations: classpath:mapper/*.xml

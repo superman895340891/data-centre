@@ -6,6 +6,7 @@ import com.ailbaba.cloud.cgc.mapping.ZMemberMapping;
 import com.ailbaba.cloud.cgc.service.MemberService;
 import com.ailbaba.cloud.cgc.service.UserService;
 
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -38,12 +39,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @GlobalTransactional
     public int insetVIP() {
-        int userId = userService.insetUser("张三", "123456");
         ZMember member = new ZMember();
-        member.setuId(userId);
+        member.setuId(1);
         member.setIsVip(1);
         int insert = memberMapping.insert(member);
+        log.info("本地事务： {}" , insert);
+        int userId = userService.insetUser("张三", "123456");
+        log.info("远程服务事务： {}" , userId);
         return insert;
     }
 

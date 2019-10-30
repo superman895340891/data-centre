@@ -83,6 +83,11 @@
             <artifactId>dubbo-serialization-kryo</artifactId>
         </dependency>
 
+        <!--分布式事务-->
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-all</artifactId>
+        </dependency>
         <!--Models Start -->
         <dependency>
             <groupId>com.alibaba.cloud.cgc</groupId>
