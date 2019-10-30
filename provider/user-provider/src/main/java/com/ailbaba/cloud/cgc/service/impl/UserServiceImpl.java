@@ -4,12 +4,11 @@ package com.ailbaba.cloud.cgc.service.impl;
 import com.ailbaba.cloud.cgc.domain.ZUser;
 import com.ailbaba.cloud.cgc.mapping.ZUserMapper;
 import com.ailbaba.cloud.cgc.service.UserService;
-import com.alibaba.dubbo.config.annotation.Service;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service(version = "1.0.0")
+@Service(version = "${provider.server.version}")
 @Slf4j
 public class UserServiceImpl implements UserService {
 

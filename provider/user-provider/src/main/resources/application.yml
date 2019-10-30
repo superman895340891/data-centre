@@ -26,7 +26,7 @@ dubbo:
   scan:
     base-packages: com.ailbaba.cloud.cgc.service.impl
   protocol:
-    name: dubboi
+    name: dubbo
     port: -1
     serialization: kryo
   registry:
@@ -46,7 +46,6 @@ server:
 logging:
   config: classpath:logback-spring.xml
 
-
-tx-lcn:
-  client:
-    manager-address: 127.0.0.1:8070
+provider:
+  server:
+    version: 1.0.0

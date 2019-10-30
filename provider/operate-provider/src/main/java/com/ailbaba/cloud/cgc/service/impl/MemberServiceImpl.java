@@ -5,21 +5,25 @@ import com.ailbaba.cloud.cgc.domain.ZUser;
 import com.ailbaba.cloud.cgc.mapping.ZMemberMapping;
 import com.ailbaba.cloud.cgc.service.MemberService;
 import com.ailbaba.cloud.cgc.service.UserService;
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
+
 import lombok.extern.slf4j.Slf4j;
 
+
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 
-@Service(version = "1.0.0")
+
+@Service(version = "${provider.server.version}")
 @Slf4j
 public class MemberServiceImpl implements MemberService {
 
     @Autowired
     ZMemberMapping memberMapping;
 
-    @Reference(version = "1.0.0",loadbalance = "txlcn_random")
+    @Reference(version = "${provider.server.version}",check = false)
     private UserService userService;
 
     @Override
@@ -41,5 +45,12 @@ public class MemberServiceImpl implements MemberService {
         member.setIsVip(1);
         int insert = memberMapping.insert(member);
         return insert;
+    }
+
+    @Override
+    public String testMethod() {
+        List<ZMember> zMembers = memberMapping.selectAll();
+        log.info("测试:  {} ",zMembers );
+        return "zMembers.toString()";
     }
 }

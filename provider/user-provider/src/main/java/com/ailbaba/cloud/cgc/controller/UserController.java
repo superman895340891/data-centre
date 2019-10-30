@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    @Reference(version = "1.0.0",check = false)
+    @Reference(version = "${provider.server.version}",check = false)
     private UserService userService;
 
     @GetMapping("/user/id")

@@ -27,15 +27,13 @@ dubbo:
     base-packages: com.ailbaba.cloud.cgc.service.impl
   protocol:
     name: dubbo
-    port: 8345
+    port: -1
     serialization: kryo
   registry:
     address: nacos://118.24.105.102:8848
     port: 80
   provider:
     filter: traceFilter
-  application:
-    name: operate-provider
 mybatis:
   type-aliases-package: com.ailbaba.cloud.cgc.mapping
   mapper-locations: classpath:mapper/*.xml
@@ -47,7 +45,6 @@ server:
 logging:
   config: classpath:logback-spring.xml
 
-
-tx-lcn:
-  client:
-    manager-address: 127.0.0.1:8070
+provider:
+  server:
+    version: 1.0.0
