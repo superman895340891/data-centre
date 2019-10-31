@@ -40,14 +40,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @GlobalTransactional
-    public int insetVIP() {
+    public int insetVIP(int id) {
         ZMember member = new ZMember();
-        member.setuId(1);
+        member.setuId(id);
         member.setIsVip(1);
         int insert = memberMapping.insert(member);
         log.info("本地事务： {}" , insert);
-        int userId = userService.insetUser("张三", "123456");
-        log.info("远程服务事务： {}" , userId);
         return insert;
     }
 

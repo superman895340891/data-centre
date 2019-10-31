@@ -6,7 +6,7 @@ public interface MemberService {
 
     ZMember getVIPInfoById();
 
-    int insetVIP();
+    int insetVIP(int id);
 
     String testMethod();
 }

@@ -3,9 +3,8 @@ package com.ailbaba.cloud.cgc.controller;
 
 import com.ailbaba.cloud.cgc.domain.ZUser;
 import com.ailbaba.cloud.cgc.service.UserService;
-import com.alibaba.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -17,4 +16,10 @@ public class UserController {
     public ZUser selectUserById(){
         return userService.getUserById();
     }
+
+    @PostMapping("/user")
+    public int addUser(@RequestBody ZUser user){
+        return userService.insetUser(user.getUserName(),user.getPassword());
+    }
+
 }

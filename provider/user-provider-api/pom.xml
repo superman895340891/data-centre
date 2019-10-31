@@ -11,4 +11,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>user-provider-api</artifactId>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba.cloud.cgc</groupId>
+            <artifactId>operate-provider-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>

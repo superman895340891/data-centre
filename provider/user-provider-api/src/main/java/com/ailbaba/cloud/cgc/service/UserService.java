@@ -7,4 +7,5 @@ public interface UserService {
     ZUser getUserById();
 
     int insetUser(String userName,String passWord);
+
 }

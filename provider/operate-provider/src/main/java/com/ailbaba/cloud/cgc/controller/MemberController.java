@@ -20,10 +20,10 @@ public class MemberController {
         return memberService.getVIPInfoById();
     }
 
-    @GetMapping("/operate/VIP")
-    public int testTransactional() {
-        return memberService.insetVIP();
-    }
+//    @GetMapping("/operate/VIP")
+//    public int testTransactional() {
+//        return memberService.insetVIP();
+//    }
 
     @GetMapping("/method")
     public String testMethod() {

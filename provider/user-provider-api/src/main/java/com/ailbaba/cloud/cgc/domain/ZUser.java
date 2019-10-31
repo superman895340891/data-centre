@@ -8,6 +8,9 @@ import java.io.Serializable;
 @Table(name = "z_user")
 @Data
 public class ZUser implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * id
      */
